@@ -5,11 +5,13 @@ import {
   OnInit,
   SimpleChanges
 } from '@angular/core';
+import {CheckboxService} from "../../../../shared/checkbox.service";
 
 @Component({
   selector: 'app-subfilters-column',
   templateUrl: './subfilters-column.component.html',
-  styleUrls: ['./subfilters-column.component.scss']
+  styleUrls: ['./subfilters-column.component.scss'],
+  providers: [CheckboxService]
 })
 export class SubfiltersColumnComponent implements OnInit, OnChanges {
 
@@ -26,7 +28,7 @@ export class SubfiltersColumnComponent implements OnInit, OnChanges {
 
   @Input() checkedValueFromFilters: string;
 
-  constructor() {
+  constructor(private checkboxService: CheckboxService) {
   }
 
   ngOnInit(): void {
@@ -66,6 +68,10 @@ export class SubfiltersColumnComponent implements OnInit, OnChanges {
         this.showAccessoriesOptions = true;
         break;
     }
+  }
+
+  onClicked(event) {
+    this.checkboxService.log(event);
   }
 
 }

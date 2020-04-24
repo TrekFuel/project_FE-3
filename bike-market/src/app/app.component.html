@@ -2,13 +2,7 @@
   <app-header></app-header>
 </header>
 <main class="row container-main mx-auto mt-4">
-  <app-filters-column
-    (valueChecked)="onValueChecked($event)"></app-filters-column>
-  <app-subfilters-column
-    [checkedValueFromFilters]="checkedValue"></app-subfilters-column>
-  <div class="container-columns">
-    <app-product-template></app-product-template>
-  </div>
+  <router-outlet></router-outlet>
 </main>
 <footer class="container-main mx-auto mt-3">
   <app-footer></app-footer>

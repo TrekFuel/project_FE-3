@@ -11,11 +11,4 @@ export class AppComponent {
   constructor() {
   }
 
-  checkedValue: string;
-
-
-  onValueChecked(value) {
-    this.checkedValue = value;
-  }
-
 }

@@ -1,0 +1,69 @@
+<div class="col-sm-12 mx-auto">
+  <h4 class="text-center mb-5">Добавить новое объявление</h4>
+  <form>
+    <mat-form-field appearance="fill" class="mr-5 mb-5"
+                    style="min-width: 300px">
+      <mat-label>Заголовок</mat-label>
+      <input matInput placeholder="Напр., тормоза Sram Guide R">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mr-5 mb-5">
+      <mat-label>Категория</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let option of options; let i = index"
+                    [value]="option"
+                    (click)="onClicked($event.target.innerText)">{{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mr-5 mb-5">
+      <mat-label>Подкатегория</mat-label>
+      <mat-select>
+        <mat-option
+          *ngFor="let suboption of suboptions; let i = index"
+          [value]="suboption">{{suboption}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mr-5 mb-5">
+      <mat-label>Состояние</mat-label>
+      <mat-select>
+        <mat-option value="new">Новое</mat-option>
+        <mat-option value="used">Б/у</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mr-5 mb-5">
+      <mat-label>Цена</mat-label>
+      <input matInput type="number" class="text-right">
+      <span matSuffix>$&nbsp;</span>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mr-5 mb-5">
+      <mat-label>Торг</mat-label>
+      <mat-select>
+        <mat-option value="trade">Да</mat-option>
+        <mat-option value="noTrade">Нет</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mr-5 mb-5">
+      <mat-label>Город</mat-label>
+      <input matInput placeholder="Напр., Москва">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mr-5 mb-5"
+                    style="min-width: 300px">
+      <mat-label>Контакты</mat-label>
+      <input matInput placeholder="Напр., +37529-132-86-33">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mb-5" style="min-width:
+  300px">
+      <mat-label>Текст объявления</mat-label>
+      <textarea rows="10" matInput
+                placeholder="Напр., продам тормоза Sram Guide R, почти новые, в комплекте отдам запасные колодки"></textarea>
+    </mat-form-field>
+    <span class="ml-5">
+      <input type="file" class="mb-5" name="img"
+             accept="image/jpeg,image/png,image/gif">
+</span>
+    <button type="submit" class="ml-4" mat-raised-button
+            color="primary">Отправить
+    </button>
+  </form>
+</div>

@@ -1,5 +1,5 @@
 <div class="col mt-3 mr-5" *ngIf="showBikeOptions">
-  <form>
+  <form (change)="onClicked($event.target.value)">
     <div class="form-group">
       <div class="mb-2">Подкатегория. Байк</div>
       <div class="form-check">
@@ -23,7 +23,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showFrameOptions">
+<div class="col mt-3 mr-5" *ngIf="showFrameOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Рама</div>
@@ -48,7 +48,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showSuspensionOptions">
+<div class="col mt-3 mr-5" *ngIf="showSuspensionOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Подвеска</div>
@@ -91,7 +91,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showBrakeOptions">
+<div class="col mt-3 mr-5" *ngIf="showBrakeOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Тормоза</div>
@@ -143,7 +143,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showTyresOptions">
+<div class="col mt-3 mr-3" *ngIf="showTyresOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Колеса и резина</div>
@@ -195,7 +195,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showDrivetrainOptions">
+<div class="col mt-3 mr-5" *ngIf="showDrivetrainOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Привод</div>
@@ -256,7 +256,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showSteeringOptions">
+<div class="col mt-3 mr-5" *ngIf="showSteeringOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Управление</div>
@@ -299,7 +299,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showSeatOptions">
+<div class="col mt-3 mr-5" *ngIf="showSeatOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Сидение</div>
@@ -342,7 +342,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showPedalsOptions">
+<div class="col mt-3 mr-5" *ngIf="showPedalsOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Педали</div>
@@ -367,7 +367,7 @@
     </div>
   </form>
 </div>
-<div class="col mt-3" *ngIf="showAccessoriesOptions">
+<div class="col mt-3 mr-5" *ngIf="showAccessoriesOptions">
   <form>
     <div class="form-group">
       <div class="mb-2 ctg">Подкатегория. Аксессуары</div>
