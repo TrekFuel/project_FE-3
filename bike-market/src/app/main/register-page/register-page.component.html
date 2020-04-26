@@ -1,15 +1,15 @@
-<div class="mx-auto mt-5 mb-5 w-50">
+<div class="row mx-auto mt-5 mb-5 w-25">
   <div class="col-sm-12 mb-5">
     <h4>Зарегистрироваться</h4>
   </div>
   <form>
-    <div class="col-sm-12">
+    <div class="col-sm-12 mb-3">
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput placeholder="pat@example.com">
       </mat-form-field>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-12 mb-3">
       <mat-form-field appearance="fill">
         <mat-label>Пароль</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'">
@@ -19,7 +19,7 @@
         </button>
       </mat-form-field>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-12 mb-3">
       <mat-form-field appearance="fill">
         <mat-label>Повторите пароль</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'">
