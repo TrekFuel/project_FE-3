@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-template',
@@ -34,10 +35,14 @@ export class ProductTemplateComponent implements OnInit {
     },
   ];
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+  }
+
+  onProductClick() {
+    this.router.navigate(['/product/:id']);
   }
 
 }
