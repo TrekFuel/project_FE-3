@@ -8,17 +8,19 @@
          title="{{currentProduct.title}}"/>
     <hr>
     <div class="card-body">
-      <h5 class="card-title text-center font-weight-bold">
-        {{currentProduct.title}}
+      <h5 class="card-title text-center font-weight-bold mb-3">
+        {{currentProduct.title | titlecase}}
       </h5>
-      <p class="card-text">
-        Текст объявления
+      <p class="card-text mb-3">
+        {{currentProduct.text}}
       </p>
-      <p class="text-italic">категория: {{currentProduct.category}} ;
+      <p class="font-italic text-monospace">
+        категория: {{currentProduct.category}} ;
         подкатегория: {{currentProduct.subcategory}} ;
         состояние: {{currentProduct.condition}} ;
-        цена: {{currentProduct.price}} ;
-        торг: ; город: {{currentProduct.city}} ; контакты: .</p>
+        цена: {{currentProduct.price | currency: 'USD' : 'code' : '1.0-0'}} ;
+        торг: {{currentProduct.trade}} ; город: {{currentProduct.city}} ;
+        контакты: {{currentProduct.contacts}} .</p>
     </div>
   </div>
 </div>

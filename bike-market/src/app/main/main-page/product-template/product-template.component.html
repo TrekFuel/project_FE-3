@@ -10,13 +10,14 @@
            title="{{product.title}}"/>
       <hr>
       <div class="card-body">
-        <h6 class="text-center single-product-title" data-index="">
-          {{product.title}}
-        </h6>
+        <a [routerLink]="['/products', product.id]">
+          <h6 class="text-center single-product-title" data-index="">
+            {{product.title | titlecase}}
+          </h6>
+        </a>
         <p class="text-muted">категория: {{product.category}}; подкатегория:
-          {{product.subcategory}};
-          состояние: {{product.condition}}; цена: {{product.price}}; город:
-          {{product.city}}, id: {{product.id}}</p>
+          {{product.subcategory}}; цена:
+          {{product.price | currency: 'USD' : 'code' : '1.0-0'}}</p>
       </div>
       <a [routerLink]="['/products', product.id]" class="text-center">
         <button type="button"
