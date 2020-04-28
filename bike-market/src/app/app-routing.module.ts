@@ -6,6 +6,7 @@ import {AboutPageComponent} from './main/about-page';
 import {PostPageComponent} from './main/post-page';
 import {LoginPageComponent} from './main/login-page';
 import {RegisterPageComponent} from './main/register-page';
+import {NotFoundPageComponent} from './main/not-found-page';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'post', component: PostPageComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
+  {path: '**', component: NotFoundPageComponent}
 ];
 
 @NgModule({

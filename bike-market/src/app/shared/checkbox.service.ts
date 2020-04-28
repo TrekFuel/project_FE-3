@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import {Injectable} from '@angular/core';
 export class CheckboxService {
   private _clicks: string[] = [];
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   log(value) {
@@ -14,4 +15,5 @@ export class CheckboxService {
     this._clicks.push(value);
     console.log(this._clicks);
   }
+
 }

@@ -2,6 +2,7 @@ import {
   Component, EventEmitter,
   OnInit, Output,
 } from '@angular/core';
+import {CheckboxService} from '../../../shared/checkbox.service';
 
 @Component({
   selector: 'app-filters-column',
@@ -12,7 +13,8 @@ import {
 export class FiltersColumnComponent implements OnInit {
 
   @Output() valueChecked: EventEmitter<any> = new EventEmitter<any>();
-  show: boolean = true;
+  show = true;
+  checked: string[];
 
   filtersArr: object[] = [
     {value: 'bike', id: 'bike', label: 'Байк'},
@@ -27,17 +29,10 @@ export class FiltersColumnComponent implements OnInit {
     {value: 'accessories', id: 'accessories', label: 'Аксессуары'}
   ];
 
-  constructor() {
+  constructor(private checkboxService: CheckboxService) {
   }
 
   ngOnInit(): void {
-  }
-
-  onChecked(event) {
-    if (event.target.checked) {
-      this.show = false;
-      this.valueChecked.emit(event.target.value);
-    }
   }
 
 }
