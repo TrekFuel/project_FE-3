@@ -19,8 +19,11 @@ export class ProductTemplateComponent implements OnInit {
 
     this.activatedRoute.queryParamMap.subscribe((queryParamMap: ParamMap) => {
       const currentQuery = queryParamMap.get('category');
-      if (currentQuery) {
-        this.productsArr = this.productsService.getProductByQuery(currentQuery);
+      if (currentQuery && currentQuery.length) {
+        this.productsArr = currentQuery.split(',')
+          .reduce((acc: Product[], filter: string): Product[] => {
+            return [...acc, ...this.productsService.getProductByQuery(filter)];
+          }, []);
       } else {
         this.productsArr = this.productsService.products;
       }

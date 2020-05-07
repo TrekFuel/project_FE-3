@@ -68,17 +68,20 @@ export class FiltersColumnComponent implements OnInit {
       );
     });
     this._currentRoutParams = result;
-    this.router.navigate(['/filters'], {queryParams: {category: this._currentRoutParams.toString()}});
+    this.router.navigate(['/filters'], {
+      queryParams:
+        {category: this._currentRoutParams.toString()}
+    });
   }
 
   ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe((queryParamMap: ParamMap) => {
       const query = queryParamMap.get('category');
-      // if (query) {
-      //   if (query !== this._currentRoutParams.toString()) {
-      //     console.log(query);
-      //   }
-      // }
+      if (query && this._currentRoutParams) {
+        if (query !== this._currentRoutParams.toString()) {
+          this._currentRoutParams = query.split(',');
+        }
+      }
     });
   }
 }
