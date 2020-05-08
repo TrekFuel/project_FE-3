@@ -16,7 +16,7 @@ export class FiltersColumnComponent implements OnInit {
   dataSource = new MatTreeNestedDataSource<ProductNode>();
   TREE_DATA = this.checkboxService.productNodes;
   // tslint:disable-next-line:variable-name
-  private _currentRoutParams: object;
+  private _currentRoutParams: string[];
 
 
   constructor(private checkboxService: CheckboxService, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -80,6 +80,25 @@ export class FiltersColumnComponent implements OnInit {
       if (query && this._currentRoutParams) {
         if (query !== this._currentRoutParams.toString()) {
           this._currentRoutParams = query.split(',');
+          let checked = [];
+          this.dataSource.data.forEach(node => {
+            checked = checked.concat(
+              this.treeControl
+                .getDescendants(node)
+                .filter(x => x.selected && x.value)
+                .map(x => x.value)
+            );
+            console.log(checked);
+            checked.forEach((checkedFilter) => {
+              if (this._currentRoutParams.includes(checkedFilter)) {
+                node.selected = true;
+                console.log('includes');
+              } else {
+                node.selected = false;
+                console.log('not include');
+              }
+            });
+          });
         }
       }
     });
