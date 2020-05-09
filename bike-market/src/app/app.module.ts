@@ -19,9 +19,8 @@ import {MainPageComponent} from './main/main-page';
 import {LoginPageComponent} from './main/login-page';
 import {SingleProductPageComponent} from './main/single-product-page';
 import { NotFoundPageComponent } from './main/not-found-page';
-import {MatTreeModule} from "@angular/material/tree";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {FormsModule} from "@angular/forms";
+import {MatTreeModule} from '@angular/material/tree';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -49,7 +48,6 @@ import {FormsModule} from "@angular/forms";
         MatIconModule,
         MatTreeModule,
         MatCheckboxModule,
-        FormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
