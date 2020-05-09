@@ -18,8 +18,8 @@ export class FiltersColumnComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   private _currentRoutParams: string[];
 
-
-  constructor(private checkboxService: CheckboxService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private checkboxService: CheckboxService, private router: Router,
+              private activatedRoute: ActivatedRoute) {
     this.dataSource.data = this.TREE_DATA;
     Object.keys(this.dataSource.data).forEach(x => {
       this.setParent(this.dataSource.data[x], null);
@@ -74,32 +74,35 @@ export class FiltersColumnComponent implements OnInit {
     });
   }
 
+  onResetFilters() {
+    this._currentRoutParams = null;
+    this.router.navigate(['/filters']);
+  }
+
   ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe((queryParamMap: ParamMap) => {
       const query = queryParamMap.get('category');
-      if (query && this._currentRoutParams) {
-        if (query !== this._currentRoutParams.toString()) {
-          this._currentRoutParams = query.split(',');
-          let checked = [];
-          this.dataSource.data.forEach(node => {
-            checked = checked.concat(
-              this.treeControl
-                .getDescendants(node)
-                .filter(x => x.selected && x.value)
-                .map(x => x.value)
-            );
-            console.log(checked);
-            checked.forEach((checkedFilter) => {
-              if (this._currentRoutParams.includes(checkedFilter)) {
-                node.selected = true;
-                console.log('includes');
-              } else {
-                node.selected = false;
-                console.log('not include');
-              }
-            });
+      if (query) {
+        this._currentRoutParams = query.split(',');
+        this.dataSource.data.forEach(node => {
+          this.treeControl.getDescendants(node).forEach((filter) => {
+            if (this._currentRoutParams.includes(filter.value)) {
+              filter.selected = true;
+              node.indeterminate = true;
+            } else {
+              filter.selected = false;
+              node.selected = false;
+            }
           });
-        }
+        });
+      } else if (query === null) {
+        this.dataSource.data.forEach((node) => {
+          this.treeControl.getDescendants(node).forEach((filter) => {
+            filter.selected = false;
+            node.indeterminate = false;
+            node.selected = false;
+          });
+        });
       }
     });
   }

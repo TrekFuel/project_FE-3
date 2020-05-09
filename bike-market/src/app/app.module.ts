@@ -21,6 +21,7 @@ import {SingleProductPageComponent} from './main/single-product-page';
 import { NotFoundPageComponent } from './main/not-found-page';
 import {MatTreeModule} from "@angular/material/tree";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -37,18 +38,19 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     SingleProductPageComponent,
     NotFoundPageComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTreeModule,
-    MatCheckboxModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTreeModule,
+        MatCheckboxModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
