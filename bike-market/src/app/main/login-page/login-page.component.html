@@ -1,0 +1,38 @@
+<div class="row mx-auto mt-5 mb-5 w-25">
+  <div class="row">
+    <img src="../../../assets/login-logo.jpg" alt="login-logo"
+         title="login-logo" class="mx-auto img-fluid mb-5">
+  </div>
+  <div class="col-sm-12 mb-5">
+    <h4>Войти</h4>
+  </div>
+  <form>
+    <div class="col-sm-12 mb-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="pat@example.com">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-12 mb-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Пароль</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-12">
+      <button type="submit" mat-raised-button
+              color="primary">Войти
+      </button>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
