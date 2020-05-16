@@ -18,9 +18,10 @@ import {RegisterPageComponent} from './main/register-page';
 import {MainPageComponent} from './main/main-page';
 import {LoginPageComponent} from './main/login-page';
 import {SingleProductPageComponent} from './main/single-product-page';
-import { NotFoundPageComponent } from './main/not-found-page';
+import {NotFoundPageComponent} from './main/not-found-page';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,18 +38,19 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     SingleProductPageComponent,
     NotFoundPageComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatTreeModule,
-        MatCheckboxModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTreeModule,
+    MatCheckboxModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
