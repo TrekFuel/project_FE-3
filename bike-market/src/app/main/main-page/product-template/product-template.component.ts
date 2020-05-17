@@ -10,33 +10,34 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./product-template.component.scss']
 })
 export class ProductTemplateComponent implements OnInit, OnDestroy {
-  productsArr: Product[] = [];
+  productsArr: Product[];
   subscription: Subscription;
 
-  constructor(private productsService: ProductsService, private activatedRoute: ActivatedRoute) {
+  constructor(private productsService: ProductsService,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-
-    this.subscription = this.productsService.getProductsFromServer()
-      .subscribe((data) => {
-        if (!(this.productsService.products.length)) {
+    if (!(this.productsService.products.length)) {
+      this.productsService.getProductsFromServer()
+        .subscribe((data) => {
           this.productsArr = data;
           this.productsService.products = data;
+        });
+    }
+
+    this.subscription = this.activatedRoute.queryParamMap
+      .subscribe((queryParamMap: ParamMap) => {
+        const currentQuery = queryParamMap.get('category');
+        if (currentQuery && currentQuery.length) {
+          this.productsArr = currentQuery.split(',')
+            .reduce((acc: Product[], filter: string): Product[] => {
+              return [...acc, ...this.productsService.getProductByQuery(filter)];
+            }, []);
+        } else {
+          this.productsArr = this.productsService.products;
         }
       });
-
-    this.activatedRoute.queryParamMap.subscribe((queryParamMap: ParamMap) => {
-      const currentQuery = queryParamMap.get('category');
-      if (currentQuery && currentQuery.length) {
-        this.productsArr = currentQuery.split(',')
-          .reduce((acc: Product[], filter: string): Product[] => {
-            return [...acc, ...this.productsService.getProductByQuery(filter)];
-          }, []);
-      } else {
-        this.productsArr = this.productsService.products;
-      }
-    });
   }
 
   ngOnDestroy() {
