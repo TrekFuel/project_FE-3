@@ -1,4 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators
+} from '@angular/forms';
+import {Suboption} from '../../shared/suboption.model';
+import {FormService} from '../../shared/form.service';
+import {ProductsService} from '../../shared/products.service';
 
 @Component({
   selector: 'app-post',
@@ -7,33 +16,31 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PostPageComponent implements OnInit {
 
-  options: string[] = ['Байк', 'Рама', 'Подвеска', 'Тормоза', 'Колеса и резина',
-    'Привод', 'Управление', 'Сидение', 'Педали', 'Аксессуары'];
-  suboptions: string[] = [];
+  options: string[] = this.formService.options;
 
-  bikeOptions: string[] = ['Хардтейл', 'Двухподвес'];
-  frameOptions: string[] = ['Хардтейл', 'Двухподвес'];
-  suspensionOptions: string[] = ['Вилка', 'Амортизатор', 'Пружина',
-    'Детали для подвески'];
-  brakesOptions: string[] = ['Дисковый тормоз', 'Ободной тормоз', 'Ротор',
-    'Колодки', 'Детали для тормозов'];
-  wheelsAndTyresOptions: string[] = ['Колесо в сборе', 'Втулка', 'Обод',
-    'Покрышки', 'Детали для колес'];
-  drivetrainOptions: string[] = ['Шатуны', 'Каретка', 'Переключатель',
-    'Манетка', 'Цепь', 'Другие детали'];
-  steeringOptions: string[] = ['Вынос', 'Руль', 'Грипсы',
-    'Детали для управления'];
-  seatOptions: string[] = ['Седло', 'Дроппер', 'Подседельная труба',
-    'Другие детали'];
-  pedalsOptions: string[] = ['Платформы', 'Контактные педали'];
-  accessoriesOptions: string[] = ['Защита рамы', 'Защитные крылья', 'Бутылки',
-    'Другие аксессуары'];
+  suboptions: Suboption[];
 
+  bikeOptions: Suboption[] = this.formService.bikeOptions;
+  frameOptions: Suboption[] = this.formService.frameOptions;
+  suspensionOptions: Suboption[] = this.formService.suspensionOptions;
+  brakesOptions: Suboption[] = this.formService.brakesOptions;
+  wheelsAndTyresOptions: Suboption[] = this.formService.wheelsAndTyresOptions;
+  drivetrainOptions: Suboption[] = this.formService.drivetrainOptions;
+  steeringOptions: Suboption[] = this.formService.steeringOptions;
+  seatOptions: Suboption[] = this.formService.seatOptions;
+  pedalsOptions: Suboption[] = this.formService.pedalsOptions;
+  accessoriesOptions: Suboption[] = this.formService.accessoriesOptions;
 
-  constructor() {
+  form: FormGroup;
+  @ViewChild(FormGroupDirective, {static: true}) FormGroupDirective:
+    FormGroupDirective;
+
+  constructor(private formService: FormService,
+              private productsService: ProductsService) {
   }
 
   ngOnInit(): void {
+    this._initForm();
   }
 
 
@@ -70,6 +77,31 @@ export class PostPageComponent implements OnInit {
         this.suboptions = this.accessoriesOptions;
         break;
     }
+  }
+
+  private _initForm() {
+    this.form = new FormGroup({
+      title: new FormControl('', Validators.required),
+      category: new FormControl('', Validators.required),
+      subcategory: new FormControl('', Validators.required),
+      condition: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
+      trade: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      contacts: new FormControl('', Validators.required),
+      text: new FormControl('', Validators.required),
+      img: new FormControl('', Validators.required),
+      id: new FormControl(39, Validators.required),
+    });
+  }
+
+  onSubmit() {
+    this.productsService.sendProductToServer(this.form.value)
+      .subscribe(() => {
+        this.FormGroupDirective.resetForm({
+          id: 40
+        });
+      });
   }
 
 }

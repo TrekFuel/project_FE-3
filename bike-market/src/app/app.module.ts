@@ -22,6 +22,7 @@ import {NotFoundPageComponent} from './main/not-found-page';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatIconModule,
     MatTreeModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

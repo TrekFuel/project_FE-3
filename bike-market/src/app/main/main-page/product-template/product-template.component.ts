@@ -18,13 +18,11 @@ export class ProductTemplateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (!(this.productsService.products.length)) {
-      this.productsService.getProductsFromServer()
-        .subscribe((data) => {
-          this.productsArr = data;
-          this.productsService.products = data;
-        });
-    }
+    this.productsService.getProductsFromServer()
+      .subscribe((data) => {
+        this.productsArr = data;
+        this.productsService.products = data;
+      });
 
     this.subscription = this.activatedRoute.queryParamMap
       .subscribe((queryParamMap: ParamMap) => {

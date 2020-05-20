@@ -54,6 +54,10 @@ export class ProductsService {
       product.subcategory === productQuery);
   }
 
+  sendProductToServer(product: Product): Observable<object> {
+    return this.http.post(`${environment.api}/products.json`, product);
+  }
+
   set products(products: Product[]) {
     this._products = products;
   }
