@@ -32,7 +32,7 @@ export class PostPageComponent implements OnInit {
   accessoriesOptions: Suboption[] = this.formService.accessoriesOptions;
 
   form: FormGroup;
-  @ViewChild(FormGroupDirective, {static: true}) FormGroupDirective:
+  @ViewChild(FormGroupDirective, {static: true}) formGroupDirective:
     FormGroupDirective;
 
   constructor(private formService: FormService,
@@ -81,24 +81,79 @@ export class PostPageComponent implements OnInit {
 
   private _initForm() {
     this.form = new FormGroup({
-      title: new FormControl('', Validators.required),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(50)
+      ]),
       category: new FormControl('', Validators.required),
       subcategory: new FormControl('', Validators.required),
       condition: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
+      price: new FormControl('', [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(100000)
+      ]),
       trade: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      contacts: new FormControl('', Validators.required),
-      text: new FormControl('', Validators.required),
+      city: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[а-яА-ЯёЁ\-]{2,25}$'),
+      ]),
+      contacts: new FormControl('', [
+        Validators.required,
+        Validators
+          .pattern('^(\\+375)\\s\\((29|25|44|33)\\)\\s(\\d{3})\\-(\\d{2})\\-(\\d{2})$')
+      ]),
+      text: new FormControl('', [
+        Validators.required,
+        Validators.minLength(20),
+        Validators.maxLength(1000)
+      ]),
       img: new FormControl('', Validators.required),
       id: new FormControl(39, Validators.required),
     });
   }
 
+  get title() {
+    return this.form.get('title');
+  }
+
+  get category() {
+    return this.form.get('category');
+  }
+
+  get subcategory() {
+    return this.form.get('subcategory');
+  }
+
+  get condition() {
+    return this.form.get('condition');
+  }
+
+  get price() {
+    return this.form.get('price');
+  }
+
+  get trade() {
+    return this.form.get('trade');
+  }
+
+  get city() {
+    return this.form.get('city');
+  }
+
+  get contacts() {
+    return this.form.get('contacts');
+  }
+
+  get text() {
+    return this.form.get('text');
+  }
+
   onSubmit() {
     this.productsService.sendProductToServer(this.form.value)
       .subscribe(() => {
-        this.FormGroupDirective.resetForm({
+        this.formGroupDirective.resetForm({
           id: 40
         });
       });

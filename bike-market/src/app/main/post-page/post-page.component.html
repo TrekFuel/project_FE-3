@@ -7,13 +7,29 @@
   <form [formGroup]="form"
         (ngSubmit)="onSubmit()"
   >
-    <mat-form-field appearance="fill" class="mr-5 mb-5"
+    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5"
                     style="min-width: 300px">
       <mat-label>Заголовок</mat-label>
       <input matInput placeholder="Напр., тормоза Sram Guide R"
              formControlName="title">
+      <small class="form-text text-muted mt-1"
+             *ngIf="title.invalid && title.touched && title.errors.required">
+        Данное поле обязательное
+      </small>
+      <small class="form-text text-muted mt-1"
+             *ngIf="title.invalid && title.touched && title.errors.minlength">
+        Минимальное количество символов -
+        {{title.errors.minlength.requiredLength}}, актуальное
+        - {{title.errors.minlength.actualLength}}
+      </small>
+      <small class="form-text text-muted mt-1"
+             *ngIf="title.invalid && title.touched && title.errors.maxlength">
+        Максимальное количество символов -
+        {{title.errors.maxlength.requiredLength}}, актуальное
+        - {{title.errors.maxlength.actualLength}}
+      </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mr-5 mb-5">
+    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
       <mat-label>Категория</mat-label>
       <mat-select
         formControlName="category">
@@ -22,8 +38,12 @@
                     (click)="onClicked($event.target.innerText)">{{option}}
         </mat-option>
       </mat-select>
+      <small class="form-text text-muted mt-1"
+             *ngIf="category.invalid && category.touched && category.errors.required">
+        Данное поле обязательное. Пожалуйста, сделайте выбор.
+      </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mr-5 mb-5">
+    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
       <mat-label>Подкатегория</mat-label>
       <mat-select
         formControlName="subcategory">
@@ -32,61 +52,129 @@
           [value]="suboption.value">{{suboption.name}}
         </mat-option>
       </mat-select>
+      <small class="form-text text-muted mt-1"
+             *ngIf="subcategory.invalid && subcategory.touched &&
+             subcategory.errors.required">
+        Данное поле обязательное. Пожалуйста, сначала выберите категорию.
+      </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mr-5 mb-5">
+    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
       <mat-label>Состояние</mat-label>
       <mat-select
         formControlName="condition">
         <mat-option value="новое">Новое</mat-option>
         <mat-option value="б/у">Б/у</mat-option>
       </mat-select>
+      <small class="form-text text-muted mt-1"
+             *ngIf="condition.invalid && condition.touched &&
+             condition.errors.required">
+        Данное поле обязательное. Пожалуйста, сделайте выбор.
+      </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mr-5 mb-5">
+    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
       <mat-label>Цена</mat-label>
       <input matInput type="number" class="text-right"
              formControlName="price">
       <span matSuffix>$&nbsp;</span>
+      <small class="form-text text-muted mt-1"
+             *ngIf="price.invalid && price.touched && price.errors.required">
+        Данное поле обязательное
+      </small>
+      <small class="form-text text-muted mt-1"
+             *ngIf="price.invalid && price.touched && price.errors.min">
+        Минимальное значение — {{price.errors.min.min}}, актуальное —
+        {{price.errors.min.actual}}
+      </small>
+      <small class="form-text text-muted mt-1"
+             *ngIf="price.invalid && price.touched && price.errors.max">
+        Максимальное значение - {{price.errors.max.max}}, актуальное -
+        {{price.errors.max.actual}}
+      </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mr-5 mb-5">
+    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
       <mat-label>Торг</mat-label>
       <mat-select
         formControlName="trade">
         <mat-option value="да">Да</mat-option>
         <mat-option value="нет">Нет</mat-option>
       </mat-select>
+      <small class="form-text text-muted mt-1"
+             *ngIf="trade.invalid && trade.touched && trade.errors.required">
+        Данное поле обязательное. Пожалуйста, сделайте выбор.
+      </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mr-5 mb-5">
+    <mat-form-field appearance="fill" class="ml-3 mr-4 mb-5">
       <mat-label>Город</mat-label>
       <input matInput placeholder="Напр., Москва"
              formControlName="city">
+      <small class="form-text text-muted mt-1"
+             *ngIf="city.invalid && city.touched && city.errors.required">
+        Данное поле обязательное
+      </small>
+      <small class="form-text text-muted mt-1"
+             *ngIf="city.invalid && city.touched && city.errors.pattern">
+        Пожалуйста, введите в формате: Минск/Санкт-Петербург, актуальное
+        значение - {{city.errors.pattern.actualValue}}
+      </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mr-5 mb-5"
+    <mat-form-field appearance="fill" class="ml-3 mr-3 mb-5"
                     style="min-width: 300px">
       <mat-label>Контакты</mat-label>
-      <input matInput placeholder="Напр., +375(29)-132-86-33"
+      <input matInput placeholder="В формате: +375 (29) 132-86-33"
              formControlName="contacts">
+      <small class="form-text text-muted mt-1"
+             *ngIf="contacts.invalid && contacts.touched &&
+             contacts.errors.required">
+        Данное поле обязательное
+      </small>
+      <small class="form-text text-muted mt-1"
+             *ngIf="contacts.invalid && contacts.touched && contacts.errors.pattern">
+        Пожалуйста, введите в формате: +375 (29) 132-86-33, актуальное
+        значение - {{contacts.errors.pattern.actualValue}}
+      </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mb-5" style="min-width:
+    <mat-form-field appearance="fill" class="ml-4 mb-5 mr-5" style="min-width:
   300px">
       <mat-label>Текст объявления</mat-label>
       <textarea rows="10" matInput
                 placeholder="Напр., продам тормоза Sram Guide R, почти новые"
                 formControlName="text"></textarea>
+      <small class="form-text text-muted mt-1"
+             *ngIf="text.invalid && text.touched && text.errors.required">
+        Данное поле обязательное
+      </small>
+      <small class="form-text text-muted mt-1"
+             *ngIf="text.invalid && text.touched && text.errors.minlength">
+        Минимальное количество символов -
+        {{text.errors.minlength.requiredLength}}, актуальное
+        - {{text.errors.minlength.actualLength}}
+      </small>
+      <small class="form-text text-muted mt-1"
+             *ngIf="text.invalid && text.touched && text.errors.maxlength">
+        Максимальное количество символов -
+        {{text.errors.maxlength.requiredLength}}, актуальное
+        - {{text.errors.maxlength.actualLength}}
+      </small>
     </mat-form-field>
-    <span class="ml-5">
-      <input type="file" class="mb-5" name="img"
-             accept="image/jpeg,image/png,image/gif"
-             formControlName="img">
-</span>
-    <mat-form-field appearance="fill" class="ml-5 mr-5 mb-5">
+    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
       <mat-label>Id</mat-label>
       <input matInput
              readonly
              formControlName="id">
     </mat-form-field>
-    <button type="submit" class="ml-5" mat-raised-button
+    <span class="ml-3 mr-5">
+      <input type="file"
+             class="mb-5"
+             name="img"
+             accept="image/jpeg,image/png,image/gif"
+             formControlName="img">
+    </span>
+    <button type="submit"
+            class="ml-3 ml-5 mb-5"
+            mat-raised-button
             color="primary"
-            [disabled]="form.invalid">Отправить
+            [disabled]="form.invalid"
+    >Отправить
     </button>
   </form>
 </div>
