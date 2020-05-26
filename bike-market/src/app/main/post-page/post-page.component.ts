@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,13 +8,15 @@ import {
 import {Suboption} from '../../shared/suboption.model';
 import {FormService} from '../../shared/form.service';
 import {ProductsService} from '../../shared/products.service';
+import {Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post-page.component.html',
   styleUrls: ['./post-page.component.scss']
 })
-export class PostPageComponent implements OnInit {
+export class PostPageComponent implements OnInit, OnDestroy {
 
   options: string[] = this.formService.options;
 
@@ -35,11 +37,19 @@ export class PostPageComponent implements OnInit {
   @ViewChild(FormGroupDirective, {static: true}) formGroupDirective:
     FormGroupDirective;
 
+  lastProductId: number;
+  getIdSubscription: Subscription;
+
   constructor(private formService: FormService,
-              private productsService: ProductsService) {
+              private productsService: ProductsService,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.getIdSubscription = this.activatedRoute.data
+      .subscribe((data) => {
+        this.lastProductId = data.postId;
+      });
     this._initForm();
   }
 
@@ -110,7 +120,7 @@ export class PostPageComponent implements OnInit {
         Validators.maxLength(1000)
       ]),
       img: new FormControl('', Validators.required),
-      id: new FormControl(39, Validators.required),
+      id: new FormControl(this.lastProductId + 1, Validators.required),
     });
   }
 
@@ -153,10 +163,15 @@ export class PostPageComponent implements OnInit {
   onSubmit() {
     this.productsService.sendProductToServer(this.form.value)
       .subscribe(() => {
+        this.lastProductId = this.lastProductId + 1;
         this.formGroupDirective.resetForm({
-          id: 40
+          id: this.lastProductId + 1,
         });
       });
+  }
+
+  ngOnDestroy() {
+    this.getIdSubscription.unsubscribe();
   }
 
 }

@@ -58,6 +58,21 @@ export class ProductsService {
     return this.http.post(`${environment.api}/products.json`, product);
   }
 
+  getLastProductId(): Observable<number> {
+    return this.http.get(`${environment.api}/products.json?orderBy="id"&limitToLast=1`)
+      .pipe(
+        map((data) => {
+          const singleProduct = [];
+          for (const item in data) {
+            if (data.hasOwnProperty(item)) {
+              singleProduct.push({...data[item]});
+            }
+          }
+          return singleProduct[0].id;
+        })
+      );
+  }
+
   set products(products: Product[]) {
     this._products = products;
   }
