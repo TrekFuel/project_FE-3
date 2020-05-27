@@ -10,6 +10,10 @@ import {FormService} from '../../shared/form.service';
 import {ProductsService} from '../../shared/products.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import {
+  AngularFireStorage,
+  AngularFireStorageReference
+} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-post',
@@ -39,10 +43,14 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   lastProductId: number;
   getIdSubscription: Subscription;
+  angularFireStorageSubscription: Subscription;
+  path: string;
+  imgUrl: AngularFireStorageReference;
 
   constructor(private formService: FormService,
               private productsService: ProductsService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private angularFireStorage: AngularFireStorage) {
   }
 
   ngOnInit(): void {
@@ -114,13 +122,14 @@ export class PostPageComponent implements OnInit, OnDestroy {
         Validators
           .pattern('^(\\+375)\\s\\((29|25|44|33)\\)\\s(\\d{3})\\-(\\d{2})\\-(\\d{2})$')
       ]),
+      id: new FormControl(this.lastProductId + 1, Validators.required),
+      imgInp: new FormControl('', Validators.required),
+      img: new FormControl(''),
       text: new FormControl('', [
         Validators.required,
         Validators.minLength(20),
         Validators.maxLength(1000)
       ]),
-      img: new FormControl('', Validators.required),
-      id: new FormControl(this.lastProductId + 1, Validators.required),
     });
   }
 
@@ -160,7 +169,26 @@ export class PostPageComponent implements OnInit, OnDestroy {
     return this.form.get('text');
   }
 
+  onFileChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const filePath = `/products-images/${file.name}`;
+      const ref = this.angularFireStorage.ref(filePath);
+      this.path = filePath;
+      const task = ref.put(file);
+      task.then(() => {
+        this.angularFireStorageSubscription = this.angularFireStorage.ref(this.path)
+          .getDownloadURL()
+          .subscribe((data) => {
+            this.imgUrl = data;
+          });
+      });
+    }
+  }
+
   onSubmit() {
+    this.form.get('imgInp').setValue(null);
+    this.form.get('img').setValue(this.imgUrl);
     this.productsService.sendProductToServer(this.form.value)
       .subscribe(() => {
         this.lastProductId = this.lastProductId + 1;
@@ -172,6 +200,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.getIdSubscription.unsubscribe();
+    this.angularFireStorageSubscription.unsubscribe();
   }
 
 }

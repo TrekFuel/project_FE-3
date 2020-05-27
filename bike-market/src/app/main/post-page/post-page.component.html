@@ -133,6 +133,23 @@
         значение - {{contacts.errors.pattern.actualValue}}
       </small>
     </mat-form-field>
+    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
+      <mat-label>Id</mat-label>
+      <input matInput
+             readonly
+             formControlName="id">
+    </mat-form-field>
+    <span class="ml-3 mr-5">
+      <input type="file"
+             class="mb-5"
+             name="img"
+             accept="image/jpeg,image/png,image/gif"
+             formControlName="imgInp"
+             (change)="onFileChange($event)">
+      <input type="text"
+             class="d-none"
+             formControlName="img">
+    </span>
     <mat-form-field appearance="fill" class="ml-4 mb-5 mr-5" style="min-width:
   300px">
       <mat-label>Текст объявления</mat-label>
@@ -156,19 +173,6 @@
         - {{text.errors.maxlength.actualLength}}
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
-      <mat-label>Id</mat-label>
-      <input matInput
-             readonly
-             formControlName="id">
-    </mat-form-field>
-    <span class="ml-3 mr-5">
-      <input type="file"
-             class="mb-5"
-             name="img"
-             accept="image/jpeg,image/png,image/gif"
-             formControlName="img">
-    </span>
     <button type="submit"
             class="ml-3 ml-5 mb-5"
             mat-raised-button

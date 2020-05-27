@@ -23,6 +23,9 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -51,9 +54,13 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatTreeModule,
     MatCheckboxModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [
+    {provide: BUCKET, useValue: 'gs://bike-market-7b14d.appspot.com'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
