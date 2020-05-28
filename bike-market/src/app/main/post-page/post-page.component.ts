@@ -43,7 +43,6 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   lastProductId: number;
   getIdSubscription: Subscription;
-  angularFireStorageSubscription: Subscription;
   path: string;
   imgUrl: AngularFireStorageReference;
 
@@ -177,7 +176,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
       this.path = filePath;
       const task = ref.put(file);
       task.then(() => {
-        this.angularFireStorageSubscription = this.angularFireStorage.ref(this.path)
+        this.angularFireStorage.ref(this.path)
           .getDownloadURL()
           .subscribe((data) => {
             this.imgUrl = data;
@@ -200,7 +199,6 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.getIdSubscription.unsubscribe();
-    this.angularFireStorageSubscription.unsubscribe();
   }
 
 }
