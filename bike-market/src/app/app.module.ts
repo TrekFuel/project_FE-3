@@ -26,6 +26,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
+import { PostPagePipe } from './main/post-page/post-page.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
     LoginPageComponent,
     SingleProductPageComponent,
     NotFoundPageComponent,
+    PostPagePipe,
   ],
   imports: [
     BrowserModule,

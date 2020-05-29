@@ -45,11 +45,57 @@ export class PostPageComponent implements OnInit, OnDestroy {
   getIdSubscription: Subscription;
   path: string;
   imgUrl: AngularFireStorageReference;
+  countryCode = '+375';
+  isSent = false;
 
   constructor(private formService: FormService,
               private productsService: ProductsService,
               private activatedRoute: ActivatedRoute,
               private angularFireStorage: AngularFireStorage) {
+  }
+
+  get title() {
+    return this.form.get('title');
+  }
+
+  get category() {
+    return this.form.get('category');
+  }
+
+  get subcategory() {
+    return this.form.get('subcategory');
+  }
+
+  get condition() {
+    return this.form.get('condition');
+  }
+
+  get price() {
+    return this.form.get('price');
+  }
+
+  get trade() {
+    return this.form.get('trade');
+  }
+
+  get city() {
+    return this.form.get('city');
+  }
+
+  get contacts() {
+    return this.form.get('contacts');
+  }
+
+  get imgInp() {
+    return this.form.get('imgInp');
+  }
+
+  get img() {
+    return this.form.get('img');
+  }
+
+  get text() {
+    return this.form.get('text');
   }
 
   ngOnInit(): void {
@@ -59,7 +105,6 @@ export class PostPageComponent implements OnInit, OnDestroy {
       });
     this._initForm();
   }
-
 
   onClicked(value) {
     switch (value) {
@@ -119,7 +164,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
       contacts: new FormControl('', [
         Validators.required,
         Validators
-          .pattern('^(\\+375)\\s\\((29|25|44|33)\\)\\s(\\d{3})\\-(\\d{2})\\-(\\d{2})$')
+          .pattern(/((\(25\))|(\(29\))|(\(33\))|(\(44\)))\s(\d{3})-(\d{2})-(\d{2})$/)
       ]),
       id: new FormControl(this.lastProductId + 1, Validators.required),
       imgInp: new FormControl('', Validators.required),
@@ -130,42 +175,6 @@ export class PostPageComponent implements OnInit, OnDestroy {
         Validators.maxLength(1000)
       ]),
     });
-  }
-
-  get title() {
-    return this.form.get('title');
-  }
-
-  get category() {
-    return this.form.get('category');
-  }
-
-  get subcategory() {
-    return this.form.get('subcategory');
-  }
-
-  get condition() {
-    return this.form.get('condition');
-  }
-
-  get price() {
-    return this.form.get('price');
-  }
-
-  get trade() {
-    return this.form.get('trade');
-  }
-
-  get city() {
-    return this.form.get('city');
-  }
-
-  get contacts() {
-    return this.form.get('contacts');
-  }
-
-  get text() {
-    return this.form.get('text');
   }
 
   onFileChange(event) {
@@ -186,15 +195,22 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.form.get('imgInp').setValue(null);
-    this.form.get('img').setValue(this.imgUrl);
+    this.contacts.setValue(`${this.countryCode} ${this.contacts.value}`);
+    this.imgInp.setValue(null);
+    this.img.setValue(this.imgUrl);
     this.productsService.sendProductToServer(this.form.value)
       .subscribe(() => {
         this.lastProductId = this.lastProductId + 1;
         this.formGroupDirective.resetForm({
           id: this.lastProductId + 1,
         });
+        this.showSuccessMessage();
       });
+  }
+
+  showSuccessMessage() {
+    this.isSent = true;
+    setTimeout(() => this.isSent = false, 15000);
   }
 
   ngOnDestroy() {
