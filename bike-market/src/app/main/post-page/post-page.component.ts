@@ -5,9 +5,9 @@ import {
   FormGroupDirective,
   Validators
 } from '@angular/forms';
-import {Suboption} from '../../shared/suboption.model';
-import {FormService} from '../../shared/form.service';
-import {ProductsService} from '../../shared/products.service';
+import {Suboption} from '../../shared/models/suboption.model';
+import {FormService} from '../../shared/services/form.service';
+import {ProductsService} from '../../shared/services/products.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {

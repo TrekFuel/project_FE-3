@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {ProductsService} from '../../shared/products.service';
-import {Product} from '../../shared/product.model';
+import {ProductsService} from '../../shared/services/products.service';
+import {Product} from '../../shared/models/product.model';
 import {exhaustMap, map, take} from 'rxjs/operators';
 
 @Component({

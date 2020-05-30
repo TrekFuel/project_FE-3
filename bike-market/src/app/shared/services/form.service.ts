@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Suboption} from './suboption.model';
+import {Suboption} from '../models/suboption.model';
 
 @Injectable({
   providedIn: 'root'
