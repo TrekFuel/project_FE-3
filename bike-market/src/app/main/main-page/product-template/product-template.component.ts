@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProductsService} from '../../../shared/services/products.service';
 import {Product} from '../../../shared/models/product.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {take, map, exhaustMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-template',
@@ -9,7 +10,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
   styleUrls: ['./product-template.component.scss']
 })
 export class ProductTemplateComponent implements OnInit {
-  productsArr: Product[];
+  @Input() productsArr: Product[];
 
   constructor(private router: Router,
               private productsService: ProductsService,
@@ -19,13 +20,16 @@ export class ProductTemplateComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.router.url.split('?')[0] !== '/filters') {
-      this.productsService.getProductsFromServer()
-        .subscribe((data) => {
+      this.productsArr = this.productsService.products;
+    } else {
+      this.productsService.getProductsFromServer().pipe(
+        take(1),
+        map((data: Product[]) => {
           this.productsArr = data;
           this.productsService.products = data;
-        });
-    } else {
-      this.activatedRoute.queryParamMap
+        }),
+        exhaustMap(() => this.activatedRoute.queryParamMap)
+      )
         .subscribe((queryParamMap: ParamMap) => {
           const currentQuery = queryParamMap.get('category');
           if (currentQuery && currentQuery.length) {
@@ -39,5 +43,4 @@ export class ProductTemplateComponent implements OnInit {
         });
     }
   }
-
 }

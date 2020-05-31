@@ -5,17 +5,18 @@ import {
   Resolve,
   RouterStateSnapshot
 } from '@angular/router';
+import {Product} from '../../shared/models/product.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 
-export class PostPageResolver implements Resolve<number> {
+export class MainPageResolver implements Resolve<Product[]> {
   constructor(private productsService: ProductsService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<number> {
-    return this.productsService.getLastProductIdFromServer();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product[]> {
+    return this.productsService.getProductsPartFromServer(9);
   }
 }

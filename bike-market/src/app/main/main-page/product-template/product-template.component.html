@@ -11,7 +11,7 @@
       <hr>
       <div class="card-body">
         <a [routerLink]="['/products', product.id]">
-          <h6 class="text-center single-product-title" data-index="">
+          <h6 class="text-center single-product-title">
             {{product.title | titlecase}}
           </h6>
         </a>
@@ -21,8 +21,7 @@
       </div>
       <a [routerLink]="['/products', product.id]" class="text-center">
         <button type="button"
-                class="btn-sm w-25 mb-3 btn-info"
-                data-index="">
+                class="btn-sm w-25 mb-3 btn-info">
           Открыть
         </button>
       </a>

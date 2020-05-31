@@ -1,8 +1,8 @@
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {Component, OnInit} from '@angular/core';
-import {CheckboxService} from '../../../shared/services/checkbox.service';
-import {ProductNode} from '../../../shared/models/product-node.model';
+import {CheckboxService} from './checkbox.service';
+import {ProductNode} from './product-node.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({
@@ -15,7 +15,6 @@ export class FiltersColumnComponent implements OnInit {
   treeControl = new NestedTreeControl<ProductNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<ProductNode>();
   TREE_DATA = this.checkboxService.productNodes;
-  // tslint:disable-next-line:variable-name
   private _currentRoutParams: string[];
 
   constructor(private checkboxService: CheckboxService, private router: Router,

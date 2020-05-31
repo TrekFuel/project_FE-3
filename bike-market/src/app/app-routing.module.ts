@@ -8,10 +8,14 @@ import {LoginPageComponent} from './main/login-page';
 import {RegisterPageComponent} from './main/register-page';
 import {NotFoundPageComponent} from './main/not-found-page';
 import {PostPageResolver} from './main/post-page/post-page.resolver';
+import {MainPageResolver} from './main/main-page/main-page.resolver';
 
 
 const routes: Routes = [
-  {path: '', component: MainPageComponent},
+  {
+    path: '', component: MainPageComponent,
+    resolve: {productsPart: MainPageResolver}
+  },
   {path: 'filters', component: MainPageComponent},
   {path: 'products/:id', component: SingleProductPageComponent},
   {path: 'about', component: AboutPageComponent},

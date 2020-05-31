@@ -1,7 +1,14 @@
 <div class="row container-main mx-auto mt-4 mr-5">
   <app-filters-column></app-filters-column>
   <div class="container-columns ml-5">
-    <app-product-template></app-product-template>
+    <app-product-template [productsArr]="products"></app-product-template>
+    <div class="row mt-3 mb-3" *ngIf="isPart">
+      <button type="button"
+              class="btn-sm btn-outline-info mx-auto"
+              (click)="showMore()">
+        Показать еще
+      </button>
+    </div>
   </div>
 </div>
 
