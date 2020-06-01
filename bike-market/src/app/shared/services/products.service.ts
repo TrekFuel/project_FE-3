@@ -12,8 +12,8 @@ export class ProductsService {
 
   private _productsArr: Product[];
   private _products: Product[] = [];
-  private endAt: number;
-  private limit = 9;
+  private _endAt: number;
+  private _limit = 9;
 
   constructor(private http: HttpClient) {
   }
@@ -24,6 +24,10 @@ export class ProductsService {
 
   get products(): Product[] {
     return [...this._products];
+  }
+
+  set limit(limit) {
+    this._limit = limit;
   }
 
   getProductsFromServer(): Observable<Product[]> {
@@ -98,7 +102,7 @@ export class ProductsService {
   }
 
   loadMore() {
-    this.endAt = this.products.length;
-    return this.getProductsPartFromServer(this.endAt + this.limit);
+    this._endAt = this.products.length;
+    return this.getProductsPartFromServer(this._endAt + this._limit);
   }
 }

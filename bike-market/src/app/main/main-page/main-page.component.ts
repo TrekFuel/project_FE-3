@@ -41,4 +41,9 @@ export class MainPageComponent implements OnInit {
         this.previousQueryLength = data.length;
       });
   }
+
+  selectPaginationLimit(limit) {
+    this.limit = +limit;
+    this.productsService.limit = +limit;
+  }
 }

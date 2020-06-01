@@ -27,6 +27,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
 import { PostPagePipe } from './main/post-page/post-page.pipe';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -44,22 +45,23 @@ import { PostPagePipe } from './main/post-page/post-page.pipe';
     NotFoundPageComponent,
     PostPagePipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTreeModule,
-    MatCheckboxModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTreeModule,
+        MatCheckboxModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireStorageModule,
+        MatRadioModule
+    ],
   providers: [
     {provide: BUCKET, useValue: 'gs://bike-market-7b14d.appspot.com'}
   ],

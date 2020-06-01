@@ -1,6 +1,30 @@
 <div class="row container-main mx-auto mt-4 mr-5">
   <app-filters-column></app-filters-column>
   <div class="container-columns ml-5">
+    <div class="row mt-1 justify-content-end" *ngIf="isPart">
+      <mat-radio-group>
+        <span matPrefix class="mr-3">Показывать по:</span>
+        <mat-radio-button value="3"
+                          class="mr-3"
+                          (change)="selectPaginationLimit($event.value)">
+          3
+        </mat-radio-button>
+        <mat-radio-button value="6"
+                          class="mr-3"
+                          (change)="selectPaginationLimit($event.value)">
+          6
+        </mat-radio-button>
+        <mat-radio-button value="9"
+                          class="mr-3"
+                          checked
+                          (change)="selectPaginationLimit($event.value)">9
+        </mat-radio-button>
+        <mat-radio-button value="12"
+                          class="mr-3"
+                          (change)="selectPaginationLimit($event.value)">12
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
     <app-product-template [productsArr]="products"></app-product-template>
     <div class="row mt-3 mb-3" *ngIf="isPart">
       <button type="button"
