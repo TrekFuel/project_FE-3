@@ -13,6 +13,7 @@ export class MainPageComponent implements OnInit {
   products: Product[];
   limit = 9;
   previousQueryLength = this.limit;
+  radios = [3, 6, 9, 12];
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -43,7 +44,7 @@ export class MainPageComponent implements OnInit {
   }
 
   selectPaginationLimit(limit) {
-    this.limit = +limit;
-    this.productsService.limit = +limit;
+    this.limit = limit;
+    this.productsService.limit = limit;
   }
 }

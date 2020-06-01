@@ -4,24 +4,12 @@
     <div class="row mt-1 justify-content-end" *ngIf="isPart">
       <mat-radio-group>
         <span matPrefix class="mr-3">Показывать по:</span>
-        <mat-radio-button value="3"
+        <mat-radio-button *ngFor="let radio of radios"
+                          [value]="radio"
                           class="mr-3"
+                          [checked]="limit === radio"
                           (change)="selectPaginationLimit($event.value)">
-          3
-        </mat-radio-button>
-        <mat-radio-button value="6"
-                          class="mr-3"
-                          (change)="selectPaginationLimit($event.value)">
-          6
-        </mat-radio-button>
-        <mat-radio-button value="9"
-                          class="mr-3"
-                          checked
-                          (change)="selectPaginationLimit($event.value)">9
-        </mat-radio-button>
-        <mat-radio-button value="12"
-                          class="mr-3"
-                          (change)="selectPaginationLimit($event.value)">12
+          {{radio}}
         </mat-radio-button>
       </mat-radio-group>
     </div>
