@@ -22,6 +22,11 @@ import {NotFoundPageComponent} from './main/not-found-page';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
+import { PostPagePipe } from './main/post-page/post-page.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,7 @@ import {HttpClientModule} from '@angular/common/http';
     LoginPageComponent,
     SingleProductPageComponent,
     NotFoundPageComponent,
+    PostPagePipe,
   ],
   imports: [
     BrowserModule,
@@ -49,9 +55,14 @@ import {HttpClientModule} from '@angular/common/http';
     MatIconModule,
     MatTreeModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [
+    {provide: BUCKET, useValue: 'gs://bike-market-7b14d.appspot.com'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

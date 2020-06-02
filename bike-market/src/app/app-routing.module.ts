@@ -7,6 +7,7 @@ import {PostPageComponent} from './main/post-page';
 import {LoginPageComponent} from './main/login-page';
 import {RegisterPageComponent} from './main/register-page';
 import {NotFoundPageComponent} from './main/not-found-page';
+import {PostPageResolver} from './main/post-page/post-page.resolver';
 
 
 const routes: Routes = [
@@ -14,7 +15,11 @@ const routes: Routes = [
   {path: 'filters', component: MainPageComponent},
   {path: 'products/:id', component: SingleProductPageComponent},
   {path: 'about', component: AboutPageComponent},
-  {path: 'post', component: PostPageComponent},
+  {
+    path: 'post',
+    component: PostPageComponent,
+    resolve: {postId: PostPageResolver}
+  },
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
   {path: '**', component: NotFoundPageComponent}

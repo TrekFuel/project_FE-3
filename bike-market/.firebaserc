@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "bike-market-7b14d": {
+      "hosting": {
+        "bike-market": [
+          "bike-market-7b14d"
+        ]
+      }
+    }
+  }
+}
