@@ -7,5 +7,9 @@
         ]
       }
     }
+  },
+  "projects": {
+    "bike-market": "bike-market-7b14d",
+    "default": "bike-market-7b14d"
   }
 }

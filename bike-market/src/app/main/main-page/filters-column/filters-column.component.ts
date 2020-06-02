@@ -1,8 +1,8 @@
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {Component, OnInit} from '@angular/core';
-import {CheckboxService} from './checkbox.service';
-import {ProductNode} from './product-node.model';
+import {CheckboxService} from './services/checkbox.service';
+import {ProductNode} from './models/product-node.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 
 @Component({

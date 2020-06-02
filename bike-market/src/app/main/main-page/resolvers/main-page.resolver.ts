@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {ProductsService} from '../../shared/services/products.service';
+import {ProductsService} from '../../../shared/services/products.service';
 import {
   ActivatedRouteSnapshot,
   Resolve,
   RouterStateSnapshot
 } from '@angular/router';
-import {Product} from '../../shared/models/product.model';
+import {Product} from '../../../shared/models/product.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
