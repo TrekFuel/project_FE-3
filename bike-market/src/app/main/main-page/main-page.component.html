@@ -1,7 +1,26 @@
 <div class="row container-main mx-auto mt-4 mr-5">
   <app-filters-column></app-filters-column>
   <div class="container-columns ml-5">
-    <app-product-template></app-product-template>
+    <div class="row mt-1 justify-content-end" *ngIf="isPart">
+      <mat-radio-group>
+        <span matPrefix class="mr-3">Показывать по:</span>
+        <mat-radio-button *ngFor="let radio of radios"
+                          [value]="radio"
+                          class="mr-3"
+                          [checked]="limit === radio"
+                          (change)="selectPaginationLimit($event.value)">
+          {{radio}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <app-product-template [productsArr]="products"></app-product-template>
+    <div class="row mt-3 mb-3" *ngIf="isPart">
+      <button type="button"
+              class="btn-sm btn-outline-info mx-auto"
+              (click)="showMore()">
+        Показать еще
+      </button>
+    </div>
   </div>
 </div>
 

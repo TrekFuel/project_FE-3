@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ProductsService} from '../../shared/products.service';
+import {ProductsService} from '../../shared/services/products.service';
 import {
   ActivatedRouteSnapshot,
   Resolve,
@@ -16,6 +16,6 @@ export class PostPageResolver implements Resolve<number> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<number> {
-    return this.productsService.getLastProductId();
+    return this.productsService.getLastProductIdFromServer();
   }
 }

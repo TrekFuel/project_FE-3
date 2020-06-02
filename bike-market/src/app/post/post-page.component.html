@@ -1,16 +1,21 @@
 <div class="container-columns col-sm-12 mx-auto">
   <div class="row">
-    <img src="../../../assets/post-logo.jpg" alt="post-logo"
-         title="post-logo" class="mx-auto img-fluid">
+    <img src="../../assets/post-logo.jpg"
+         alt="post-logo"
+         title="post-logo"
+         class="mx-auto img-fluid">
   </div>
   <h4 class="text-center mt-5 mb-5">Добавить новое объявление</h4>
   <form [formGroup]="form"
         (ngSubmit)="onSubmit()"
+        autocomplete="on"
   >
-    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5"
+    <mat-form-field appearance="fill"
+                    class="ml-3 mr-5 mb-5"
                     style="min-width: 300px">
       <mat-label>Заголовок</mat-label>
-      <input matInput placeholder="Напр., тормоза Sram Guide R"
+      <input matInput
+             placeholder="Напр., тормоза Sram Guide R"
              formControlName="title">
       <small class="form-text text-muted mt-1"
              *ngIf="title.invalid && title.touched && title.errors.required">
@@ -29,7 +34,8 @@
         - {{title.errors.maxlength.actualLength}}
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
+    <mat-form-field appearance="fill"
+                    class="ml-3 mr-5 mb-5">
       <mat-label>Категория</mat-label>
       <mat-select
         formControlName="category">
@@ -43,7 +49,8 @@
         Данное поле обязательное. Пожалуйста, сделайте выбор.
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
+    <mat-form-field appearance="fill"
+                    class="ml-3 mr-5 mb-5">
       <mat-label>Подкатегория</mat-label>
       <mat-select
         formControlName="subcategory">
@@ -58,7 +65,8 @@
         Данное поле обязательное. Пожалуйста, сначала выберите категорию.
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
+    <mat-form-field appearance="fill"
+                    class="ml-3 mr-5 mb-5">
       <mat-label>Состояние</mat-label>
       <mat-select
         formControlName="condition">
@@ -71,9 +79,12 @@
         Данное поле обязательное. Пожалуйста, сделайте выбор.
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
+    <mat-form-field appearance="fill"
+                    class="ml-3 mr-5 mb-5">
       <mat-label>Цена</mat-label>
-      <input matInput type="number" class="text-right"
+      <input matInput
+             type="number"
+             class="text-right"
              formControlName="price">
       <span matSuffix>$&nbsp;</span>
       <small class="form-text text-muted mt-1"
@@ -91,7 +102,8 @@
         {{price.errors.max.actual}}
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
+    <mat-form-field appearance="fill"
+                    class="ml-3 mr-5 mb-5">
       <mat-label>Торг</mat-label>
       <mat-select
         formControlName="trade">
@@ -103,9 +115,12 @@
         Данное поле обязательное. Пожалуйста, сделайте выбор.
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-4 mb-5">
+    <mat-form-field
+      appearance="fill"
+      class="ml-3 mr-4 mb-5">
       <mat-label>Город</mat-label>
-      <input matInput placeholder="Напр., Москва"
+      <input matInput
+             placeholder="Напр., Москва"
              formControlName="city">
       <small class="form-text text-muted mt-1"
              *ngIf="city.invalid && city.touched && city.errors.required">
@@ -117,7 +132,8 @@
         значение - {{city.errors.pattern.actualValue}}
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-3 mb-5"
+    <mat-form-field appearance="fill"
+                    class="ml-3 mr-3 mb-5"
                     style="min-width: 300px">
       <mat-label>Контакты</mat-label>
       <span matPrefix>+375 &nbsp;</span>
@@ -137,7 +153,8 @@
         Пожалуйста, введите полный номер с валидным кодом оператора
       </small>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="ml-3 mr-5 mb-5">
+    <mat-form-field appearance="fill"
+                    class="ml-3 mr-5 mb-5">
       <mat-label>Id</mat-label>
       <input matInput
              readonly
@@ -154,10 +171,13 @@
              class="d-none"
              formControlName="img">
     </span>
-    <mat-form-field appearance="fill" class="ml-4 mb-5 mr-5" style="min-width:
+    <mat-form-field appearance="fill"
+                    class="ml-4 mb-5 mr-5"
+                    style="min-width:
   300px">
       <mat-label>Текст объявления</mat-label>
-      <textarea rows="10" matInput
+      <textarea rows="10"
+                matInput
                 placeholder="Напр., продам тормоза Sram Guide R, почти новые"
                 formControlName="text"></textarea>
       <small class="form-text text-muted mt-1"
@@ -185,7 +205,8 @@
     >Отправить
     </button>
   </form>
-  <div class="alert alert-success mb-5 w-50 mx-auto" *ngIf="isSent">
+  <div class="alert alert-success mb-5 w-50 mx-auto"
+       *ngIf="isSent">
     <p class="text-center">
       Ваше объявление успешно опубликовано! <br> ID объявления:
       {{lastProductId}},
