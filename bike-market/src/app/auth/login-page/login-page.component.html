@@ -1,32 +1,79 @@
 <div class="row mx-auto mt-5 mb-5 w-25">
   <div class="row">
-    <img src="../../../assets/login-logo.jpg" alt="login-logo"
-         title="login-logo" class="mx-auto img-fluid mb-5">
+    <img src="../../../assets/login-logo.jpg"
+         alt="login-logo"
+         title="login-logo"
+         class="mx-auto img-fluid mb-5">
   </div>
-  <div class="col-sm-12 mb-5">
+  <div class="col-sm-12 mb-5 text-center">
     <h4>Войти</h4>
   </div>
-  <form [formGroup]="form">
+  <form [formGroup]="form"
+        class="auth-form">
     <div class="col-sm-12 mb-3">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill"
+                      class="full-width">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="pat@example.com" formControlName="email">
+        <input matInput
+               type="email"
+               autocomplete="on"
+               placeholder="pat@example.com"
+               formControlName="email">
+        <small class="form-text text-muted mt-1"
+               *ngIf="email.invalid && email.touched && email.errors.required">
+          Данное поле обязательное
+        </small>
+        <small class="form-text text-muted mt-1"
+               *ngIf="email.invalid && email.touched && email.errors.email">
+          Пожалуйста, введите валидный email
+        </small>
+        <small class="form-text text-muted mt-1"
+               *ngIf="email.invalid && email.touched && email.errors.minlength">
+          Минимальное количество символов -
+          {{email.errors.minlength.requiredLength}}, актуальное
+          - {{email.errors.minlength.actualLength}}
+        </small>
+        <small class="form-text text-muted mt-1"
+               *ngIf="email.invalid && email.touched && email.errors.maxlength">
+          Максимальное количество символов -
+          {{email.errors.maxlength.requiredLength}}, актуальное
+          - {{email.errors.maxlength.actualLength}}
+        </small>
       </mat-form-field>
     </div>
     <div class="col-sm-12 mb-3">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill"
+                      class="full-width">
         <mat-label>Пароль</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'"
+        <input matInput
+               autocomplete="off"
+               [type]="hide ? 'password' : 'text'"
                formControlName="password">
-        <button mat-icon-button matSuffix (click)="hide = !hide"
-                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <small class="form-text text-muted mt-1"
+               *ngIf="password.invalid && password.touched &&
+               password.errors.required">
+          Данное поле обязательное
+        </small>
+        <small class="form-text text-muted mt-1"
+               *ngIf="password.invalid && password.touched &&
+               password.errors.pattern">
+          Пожалуйста, введите сложный пароль (минимум: 1 латинская буква в
+          нижнем регистре, 1 в верхнем, 1 цифра, 1 спецсимвол - в сумме
+          минимум 6 символов)
+        </small>
+        <button mat-icon-button
+                matSuffix (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field>
     </div>
-    <div class="col-sm-12">
-      <button type="submit" mat-raised-button
-              color="primary">Войти
+    <div class="col-sm-12 text-center">
+      <button type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="form.invalid">Войти
       </button>
     </div>
   </form>

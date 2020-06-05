@@ -11,6 +11,14 @@ export class LoginPageComponent implements OnInit {
 
   form: FormGroup;
 
+  get email() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
+
   constructor() {
   }
 
@@ -20,8 +28,17 @@ export class LoginPageComponent implements OnInit {
 
   private _initForm() {
     this.form = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(6),
+        Validators.maxLength(40)
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators
+          .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}/)
+      ]),
     });
   }
 
