@@ -9,6 +9,7 @@
     <h4>Зарегистрироваться</h4>
   </div>
   <form [formGroup]="form"
+        (ngSubmit)="onSignUp()"
         class="auth-form">
     <div class="col-sm-12 mb-3">
       <mat-form-field appearance="fill"
@@ -112,4 +113,10 @@
       </button>
     </div>
   </form>
+  <div class="alert alert-success mt-5 w-100 mx-auto"
+       *ngIf="isRegistered">
+    <p class="text-center">
+      Ваш аккаунт на email <b>{{registeredEmail}}</b> успешно зарегистрирован!
+    </p>
+  </div>
 </div>

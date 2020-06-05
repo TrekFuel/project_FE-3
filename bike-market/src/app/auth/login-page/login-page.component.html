@@ -9,6 +9,7 @@
     <h4>Войти</h4>
   </div>
   <form [formGroup]="form"
+        (ngSubmit)="onSignIn()"
         class="auth-form">
     <div class="col-sm-12 mb-3">
       <mat-form-field appearance="fill"

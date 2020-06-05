@@ -1,0 +1,8 @@
+<div class="alert alert-danger mt-4 mb-4"
+     *ngIf="_errorFromService$ | async">
+  <p class="text-center mt-1 mb-1">
+    {{_errorFromService$.getValue().errorMessage}}
+  </p>
+</div>
+
+

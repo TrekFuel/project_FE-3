@@ -3,13 +3,14 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireStorageModule, BUCKET} from '@angular/fire/storage';
 import {SharedModule} from './shared/shared.module';
 import {AuthModule} from './auth/auth.module';
 import {MainModule} from './main/main.module';
+import {ErrorsInterceptor} from './shared/errors/interceptors/errors.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MainModule} from './main/main.module';
     MainModule,
   ],
   providers: [
-    {provide: BUCKET, useValue: 'gs://bike-market-7b14d.appspot.com'}
+    {provide: BUCKET, useValue: 'gs://bike-market-7b14d.appspot.com'},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

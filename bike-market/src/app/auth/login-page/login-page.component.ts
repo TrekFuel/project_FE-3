@@ -1,5 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators
+} from '@angular/forms';
+import {AuthService} from '../services/auth.service';
+import {AuthResponse} from '../models/auth-response.model';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +17,8 @@ export class LoginPageComponent implements OnInit {
   hide = true;
 
   form: FormGroup;
+  @ViewChild(FormGroupDirective, {static: true}) formGroupDirective:
+    FormGroupDirective;
 
   get email() {
     return this.form.get('email');
@@ -19,7 +28,7 @@ export class LoginPageComponent implements OnInit {
     return this.form.get('password');
   }
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -42,4 +51,11 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
+  onSignIn() {
+    this.authService.signIn(this.email.value, this.password.value)
+      .subscribe((data: AuthResponse) => {
+        this.formGroupDirective.resetForm();
+        console.log(data);
+      });
+  }
 }
