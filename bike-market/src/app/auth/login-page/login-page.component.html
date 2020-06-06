@@ -63,7 +63,8 @@
           минимум 6 символов)
         </small>
         <button mat-icon-button
-                matSuffix (click)="hide = !hide"
+                matSuffix
+                (click)="onHideShowClick()"
                 [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

@@ -19,8 +19,8 @@ export class ErrorsInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: any) => {
-        const errorShortcut = error.error.error;
-        const errorText = AUTH_ERRORS_LIST[errorShortcut.message] || errorShortcut;
+        const errorShortcut = error.error.error.message.split(' ')[0];
+        const errorText = AUTH_ERRORS_LIST[errorShortcut];
         this.errorsService.emitError({errorMessage: errorText});
         return throwError(error);
       }),

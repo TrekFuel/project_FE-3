@@ -42,6 +42,11 @@ export class RegisterPageComponent implements OnInit {
     this._initForm();
   }
 
+  onHideShowClick() {
+    this.hide = !this.hide;
+    return false;
+  }
+
   private _initForm() {
     this.form = new FormGroup({
       email: new FormControl('', [

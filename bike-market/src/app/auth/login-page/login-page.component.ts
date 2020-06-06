@@ -35,6 +35,11 @@ export class LoginPageComponent implements OnInit {
     this._initForm();
   }
 
+  onHideShowClick() {
+    this.hide = !this.hide;
+    return false;
+  }
+
   private _initForm() {
     this.form = new FormGroup({
       email: new FormControl('', [
@@ -55,7 +60,6 @@ export class LoginPageComponent implements OnInit {
     this.authService.signIn(this.email.value, this.password.value)
       .subscribe((data: AuthResponse) => {
         this.formGroupDirective.resetForm();
-        console.log(data);
       });
   }
 }

@@ -5,6 +5,7 @@ import {HeaderComponent} from './header/header.component';
 import {NotFoundPageComponent} from './not-found-page';
 import {RouterModule} from '@angular/router';
 import { ErrorsComponent } from './errors/errors.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ErrorsComponent } from './errors/errors.component';
     HeaderComponent,
     NotFoundPageComponent,
     ErrorsComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { ErrorsComponent } from './errors/errors.component';
     HeaderComponent,
     NotFoundPageComponent,
     ErrorsComponent,
+    LoaderComponent,
   ]
 })
 export class SharedModule {

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +9,9 @@ import {Component, OnInit} from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   dropdowned = false;
+  user$ = this.authService.userSubject$;
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
