@@ -12,6 +12,7 @@ import {ErrorsService} from '../services/errors.service';
 
 @Injectable()
 export class ErrorsInterceptor implements HttpInterceptor {
+  errorText: string;
 
   constructor(private errorsService: ErrorsService) {
   }
@@ -19,9 +20,13 @@ export class ErrorsInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: any) => {
-        const errorShortcut = error.error.error.message.split(' ')[0];
-        const errorText = AUTH_ERRORS_LIST[errorShortcut];
-        this.errorsService.emitError({errorMessage: errorText});
+        const errorShortcut = error.error.error;
+        if (errorShortcut.message) {
+          this.errorText = AUTH_ERRORS_LIST[errorShortcut.message.split(' ')[0]];
+        } else {
+          this.errorText = errorShortcut;
+        }
+        this.errorsService.emitError({errorMessage: this.errorText});
         return throwError(error);
       }),
     );

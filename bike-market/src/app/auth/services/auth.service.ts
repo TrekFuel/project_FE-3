@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../models/user.model';
 import {tap} from 'rxjs/operators';
 import {AuthResponse} from '../models/auth-response.model';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
     return this._user$;
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   signUp(email: string, password: string): Observable<object> {
@@ -45,6 +46,12 @@ export class AuthService {
     const user: User = new User(response.email, response.localId,
       response.idToken, expirationDate);
     this._user$.next(user);
+    this.router.navigate([environment.loginRedirectUrl]);
+  }
+
+  logout() {
+    this._user$.next(null);
+    this.router.navigate([environment.logoutRedirectUrl]);
   }
 
 }

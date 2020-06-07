@@ -6,6 +6,7 @@ import {NotFoundPageComponent} from './not-found-page';
 import {RouterModule} from '@angular/router';
 import { ErrorsComponent } from './errors/errors.component';
 import { LoaderComponent } from './loader/loader.component';
+import { DropdownDirective } from './header/directives/dropdown.directive';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { LoaderComponent } from './loader/loader.component';
     NotFoundPageComponent,
     ErrorsComponent,
     LoaderComponent,
+    DropdownDirective,
   ],
   imports: [
     CommonModule,

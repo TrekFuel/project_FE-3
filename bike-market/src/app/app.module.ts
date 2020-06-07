@@ -12,6 +12,7 @@ import {AuthModule} from './auth/auth.module';
 import {MainModule} from './main/main.module';
 import {ErrorsInterceptor} from './shared/errors/interceptors/errors.interceptor';
 import {LoaderInterceptor} from './shared/loader/interceptors/loader.interceptor';
+import {AuthInterceptor} from './auth/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {LoaderInterceptor} from './shared/loader/interceptors/loader.interceptor
     {provide: BUCKET, useValue: 'gs://bike-market-7b14d.appspot.com'},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
 
   ],
   bootstrap: [AppComponent]

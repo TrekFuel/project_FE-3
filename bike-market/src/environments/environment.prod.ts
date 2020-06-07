@@ -1,11 +1,12 @@
 export const environment = {
   production: true,
   api: 'https://bike-market-7b14d.firebaseio.com',
+  loginRedirectUrl: '/',
+  logoutRedirectUrl: '/login',
   firebase: {
     apiKey: 'AIzaSyD2Db5cDW-X5P1gLaLqbotib0PGQEqZKKk',
     signUpUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
     signInUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
-    onSuccessAuthRedirectUrl: '/',
     authDomain: 'bike-market-7b14d.firebaseapp.com',
     databaseURL: 'https://bike-market-7b14d.firebaseio.com',
     projectId: 'bike-market-7b14d',
