@@ -6,6 +6,7 @@ import {User} from '../models/user.model';
 import {tap} from 'rxjs/operators';
 import {AuthResponse} from '../models/auth-response.model';
 import {Router} from '@angular/router';
+import {ErrorsService} from '../../shared/errors/services/errors.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,9 @@ export class AuthService {
     return this._user$;
   }
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient,
+              private router: Router,
+              private errorsService: ErrorsService) {
   }
 
   signUp(email: string, password: string): Observable<object> {
@@ -43,15 +46,67 @@ export class AuthService {
   private _loginHandler(response: AuthResponse) {
     const expirationDate = new Date(new Date().getTime() +
       (Number(response.expiresIn) * 1000));
-    const user: User = new User(response.email, response.localId,
-      response.idToken, expirationDate);
+
+    const user: User = new User(
+      response.email,
+      response.localId,
+      response.idToken,
+      expirationDate
+    );
+
     this._user$.next(user);
-    this.router.navigate([environment.loginRedirectUrl]);
+    localStorage.setItem(environment.localStorageUser, JSON.stringify(user));
+    this.autoLogout(Number(response.expiresIn) * 1000);
+
+    if (this.router.url === '/register') {
+      setTimeout(() => {
+        this.router.navigate([environment.loginRedirectUrl]);
+      }, 2000);
+    } else {
+      this.router.navigate([environment.loginRedirectUrl]);
+    }
   }
 
   logout() {
     this._user$.next(null);
+    localStorage.removeItem(environment.localStorageUser);
     this.router.navigate([environment.logoutRedirectUrl]);
+  }
+
+  autoLogin() {
+    let user: {
+      email: string,
+      id: string,
+      _token: string,
+      _expirationDate: string,
+    };
+
+    const userFromLocalStorage = localStorage.getItem(environment.localStorageUser);
+    if (userFromLocalStorage) {
+      user = JSON.parse(userFromLocalStorage);
+    } else {
+      return false;
+    }
+
+    const loadedUser = new User(
+      user.email,
+      user.id,
+      user._token,
+      new Date(user._expirationDate)
+    );
+
+    if (loadedUser && loadedUser.userToken) {
+      this._user$.next(loadedUser);
+      const duration = new Date(user._expirationDate).getTime() - new Date().getTime();
+      this.autoLogout(duration);
+    }
+  }
+
+  autoLogout(duration: number) {
+    setTimeout(() => {
+      this.logout();
+      this.errorsService.emitError({errorMessage: 'Ваша сессия истекла'});
+    }, duration);
   }
 
 }

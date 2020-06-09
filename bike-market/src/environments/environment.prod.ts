@@ -3,6 +3,7 @@ export const environment = {
   api: 'https://bike-market-7b14d.firebaseio.com',
   loginRedirectUrl: '/',
   logoutRedirectUrl: '/login',
+  localStorageUser: 'user',
   firebase: {
     apiKey: 'AIzaSyD2Db5cDW-X5P1gLaLqbotib0PGQEqZKKk',
     signUpUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
