@@ -1,29 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-light" id="nvb">
-  <a routerLink="/" [routerLinkActive]="'img-thumbnail'"
+<nav class="navbar navbar-expand-lg navbar-light"
+     id="nvb">
+  <a routerLink="/"
+     [routerLinkActive]="'img-thumbnail'"
      [routerLinkActiveOptions]="{exact: true}"
-     class="ml-2">
-    <img src="../../../assets/project-logo.png" width="45"
-         height="45" alt="BikeMarket" title="BikeMarket">
+     class="ml-2 mr-5 mb-1">
+    <img src="../../../assets/project-logo.png"
+         width="45"
+         height="45"
+         alt="BikeMarket"
+         title="BikeMarket">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse"
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
           data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation" (click)="dropdowned = !dropdowned">
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          appDropdown>
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent"
-       [ngClass]="{'show': dropdowned}">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active mr-5">
+  <div class="collapse navbar-collapse justify-content-between"
+       id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item">
         <a routerLink="/about"
            [routerLinkActive]="'active'"
            [routerLinkActiveOptions]="{exact: true}">
-          <button class="nav-link btn about-btn ml-5" id="aboutButton">О
+          <button class="nav-link btn about-btn"
+                  id="aboutButton">О
             проекте<span
               class="sr-only"></span></button>
         </a>
       </li>
-      <li class="nav-item active ml-5 mr-5">
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
         <a routerLink="/post"
            [routerLinkActive]="'active'"
            [routerLinkActiveOptions]="{exact: true}">
@@ -32,7 +44,10 @@
             class="sr-only"></span></button>
         </a>
       </li>
-      <li class="nav-item active ml-5 mr-5">
+    </ul>
+    <ul class="navbar-nav"
+        *ngIf="!(user$ | async)">
+      <li class="nav-item">
         <a routerLink="/login"
            [routerLinkActive]="'active'"
            [routerLinkActiveOptions]="{exact: true}">
@@ -41,14 +56,34 @@
             class="sr-only"></span></button>
         </a>
       </li>
-      <li class="nav-item active">
+    </ul>
+    <ul class="navbar-nav mr-2"
+        *ngIf="!(user$ | async)">
+      <li class="nav-item">
         <a routerLink="/register"
            [routerLinkActive]="'active'"
            [routerLinkActiveOptions]="{exact: true}">
-          <button class="nav-link btn register-btn ml-5"
+          <button class="nav-link btn register-btn"
                   id="registerButton">Регистрация<span
             class="sr-only"></span></button>
         </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mt-2"
+        *ngIf="user$ | async">
+      <li class="nav-item">
+        <p class="font-italic">
+          {{user$.getValue().email}}
+        </p>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-2"
+        *ngIf="user$ | async">
+      <li class="nav-item">
+        <button class="btn"
+                (click)="onLogout()">
+          Выход
+          <span class="sr-only"></span></button>
       </li>
     </ul>
   </div>

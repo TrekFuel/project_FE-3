@@ -2,12 +2,12 @@
   <div class="col-md-4 mb-4 mt-3 single-product"
        *ngFor="let product of productsArr; let i = index;">
     <div class="card">
-      <img src="{{product.img}}"
-           class="rounded mx-auto d-block mt-3 img-fluid"
-           width="240"
-           height="135"
-           alt="{{product.title}}"
-           title="{{product.title}}"/>
+      <a [routerLink]="['/products', product.id]">
+        <img src="{{product.img}}"
+             class="rounded mx-auto d-block mt-3 img-fluid"
+             alt="{{product.title}}"
+             title="{{product.title}}"/>
+      </a>
       <hr>
       <div class="card-body">
         <a [routerLink]="['/products', product.id]">
