@@ -1,16 +1,18 @@
-<div class="row mx-auto mt-5 mb-5 w-25">
+<div class="row mx-auto mt-5 mb-5 w-33">
   <div class="row">
     <img src="../../../assets/register-logo.jpg"
+         width="400"
+         height="200"
          alt="register-logo"
          title="register-logo"
          class="mx-auto img-fluid rounded mb-5">
   </div>
   <div class="col-sm-12 mb-5 text-center">
-    <h4>Зарегистрироваться</h4>
+    <h4>Регистрация</h4>
   </div>
   <form [formGroup]="form"
         (ngSubmit)="onSignUp()"
-        class="auth-form">
+        class="container-fluid">
     <div class="col-sm-12 mb-3">
       <mat-form-field appearance="fill"
                       class="full-width">
@@ -109,7 +111,7 @@
       <button type="submit"
               mat-raised-button
               color="primary"
-              [disabled]="form.invalid">Зарегистрироваться
+              [disabled]="form.invalid">Регистрация
       </button>
     </div>
   </form>
